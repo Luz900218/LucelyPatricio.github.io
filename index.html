@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>María Lucely Patricio García | Portfolio</title>
+    <style>
+        :root {
+            --primary: #2c3e5a;
+            --accent: #e8a838;
+            --accent-hover: #d4932e;
+            --bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --text: #333;
+            --text-light: #666;
+            --border: #e0e4ea;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(44, 62, 90, 0.97);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+        }
+
+        nav .logo {
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        nav .logo span {
+            color: var(--accent);
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            letter-spacing: 0.3px;
+        }
+
+        nav .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        /* HERO */
+        .hero {
+            margin-top: 60px;
+            background: linear-gradient(135deg, #2c3e5a 0%, #1a2a40 50%, #2c3e5a 100%);
+            color: #fff;
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(232, 168, 56, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 50%, rgba(232, 168, 56, 0.05) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.15rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .hero .location {
+            font-size: 0.95rem;
+            color: #a0b0c0;
+            margin-bottom: 2rem;
+        }
+
+        .hero .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero .contact-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.5rem 1.2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .hero .contact-links a:hover {
+            border-color: var(--accent);
+            background: rgba(232, 168, 56, 0.1);
+            color: var(--accent);
+        }
+
+        /* STATS */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255,255,255,0.07);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat .label {
+            font-size: 0.8rem;
+            color: #a0b0c0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* SECTIONS */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title .underline {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        /* ABOUT */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        /* PROJECTS */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+
+        .project-card .project-number {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: rgba(44, 62, 90, 0.06);
+            line-height: 1;
+        }
+
+        .project-card .company {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.4rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.15rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            padding-right: 2rem;
+        }
+
+        .project-card p {
+            font-size: 0.92rem;
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .project-card .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .project-card .tech-tags span {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.7rem;
+            background: rgba(44, 62, 90, 0.06);
+            color: var(--primary);
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        /* SKILLS */
+        #skills {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        #skills .section-title h2 {
+            color: #fff;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .skill-category {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .skill-category:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--accent);
+        }
+
+        .skill-category h3 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+
+        .skill-category .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .skill-category .skill-list span {
+            font-size: 0.85rem;
+            padding: 0.3rem 0.8rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50px;
+            color: #d0d8e0;
+        }
+
+        /* EDUCATION & CERTS */
+        .edu-certs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .edu-card, .cert-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+        }
+
+        .edu-card h3, .cert-card h3 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .edu-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .edu-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .edu-item h4 {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .edu-item .school {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .edu-item .year {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .cert-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .cert-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.7rem 1rem;
+            background: var(--bg);
+            border-radius: 8px;
+            font-size: 0.92rem;
+        }
+
+        .cert-list li .provider {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* LANGUAGES */
+        .languages {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .language-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--card-bg);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            border: 1px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        .language-badge .level {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary);
+            color: #a0b0c0;
+            text-align: center;
+            padding: 2.5rem 2rem;
+        }
+
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        footer .footer-links a {
+            color: #a0b0c0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        footer .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        footer p {
+            font-size: 0.85rem;
+        }
+
+        /* ANIMATIONS */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: rgba(44, 62, 90, 0.98);
+                flex-direction: column;
+                padding: 1rem 2rem;
+                gap: 1rem;
+            }
+
+            nav .nav-links.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .edu-certs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .hero .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero .subtitle {
+                font-size: 0.95rem;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="logo">ML<span>PG</span></div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#education">Education</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Mar&iacute;a Lucely Patricio Garc&iacute;a</h1>
+            <p class="subtitle">Software Developer | Automation Engineer | Data Analyst</p>
+            <p class="location">Ciudad Ju&aacute;rez, M&eacute;xico</p>
+            <div class="contact-links">
+                <a href="mailto:lucely.patricio_g@hotmail.com">lucely.patricio_g@hotmail.com</a>
+                <a href="tel:+526561222451">+52 1 656 122 2451</a>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <span class="number">11+</span>
+                    <span class="label">Years Exp.</span>
+                </div>
+                <div class="stat">
+                    <span class="number">8+</span>
+                    <span class="label">Projects</span>
+                </div>
+                <div class="stat">
+                    <span class="number">3</span>
+                    <span class="label">Industries</span>
+                </div>
+                <div class="stat">
+                    <span class="number">10+</span>
+                    <span class="label">Technologies</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="section-title">
+            <h2>About Me</h2>
+            <div class="underline"></div>
+        </div>
+        <p class="about-content fade-in">
+            Multidisciplinary Engineer with 11+ years of experience at the intersection of software development,
+            automation, and data analytics. Proven ability to design and deliver end-to-end solutions&mdash;from
+            low-level hardware communication to cloud dashboards and machine learning models. Adaptable, self-driven,
+            and committed to continuous growth, I bring deep technical expertise combined with the curiosity to learn
+            and apply emerging technologies in any industry.
+        </p>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="section-title">
+            <h2>Featured Projects</h2>
+            <div class="underline"></div>
+        </div>
+        <div class="projects-grid">
+
+            <div class="project-card fade-in">
+                <span class="project-number">01</span>
+                <p class="company">Audisel Inc</p>
+                <h3>Manufacturing Traceability System</h3>
+                <p>Designed and built a real-time traceability system in C# using Windows Communication Foundation and MySQL database. Implemented XML-based messaging to synchronize data across ten manufacturing stations.</p>
+                <div class="tech-tags">
+                    <span>C#</span><span>WCF</span><span>MySQL</span><span>XML</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <span class="project-number">02</span>
+                <p class="company">VISHAY</p>
+                <h3>Automated Test Power Supply System</h3>
+                <p>Designed automated test orchestration and data profiling system in C# using Windows Forms and SQL Server. Managed load balancing across twenty-four power supplies with real-time condition monitoring.</p>
+                <div class="tech-tags">
+                    <span>C#</span><span>Windows Forms</span><span>SQL Server</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <span class="project-number">03</span>
+                <p class="company">VISHAY</p>
+                <h3>PCB Resistance Measurement System</h3>
+                <p>Automated PCB test station software in C# with WPF interface to acquire measurements from precision instrumentation and apply calibration formulas for accurate low-resistance measurements.</p>
+                <div class="tech-tags">
+                    <span>C#</span><span>WPF</span><span>Microsoft Access</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <span class="project-number">04</span>
+                <p class="company">VISHAY</p>
+                <h3>Multi-Source Test Reporting System</h3>
+                <p>Multi-source data aggregation system in C# using Crystal Reports to generate customized test reports from SQL, Access, and Excel. Dynamic parameters adapted automatically based on test type.</p>
+                <div class="tech-tags">
+                    <span>C#</span><span>Crystal Reports</span><span>SQL</span><span>MS Access</span><span>Excel</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <span class="project-number">05</span>
+                <p class="company">VISHAY</p>
+                <h3>Thermal Imaging Stress Test System</h3>
+                <p>High-current stress test system in C# with custom thermal image processing to detect hot zones and failure patterns in real-time using Optris infrared camera integration.</p>
+                <div class="tech-tags">
+                    <span>C#</span><span>Optris API</span><span>Imaging Libraries</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <span class="project-number">06</span>
+                <p class="company">APTIV</p>
+                <h3>CAN Communication Library</h3>
+                <p>Reusable C# CAN communication library using Peak Systems hardware to simplify ECU integration with message encapsulation and automotive protocol alignment.</p>
+                <div class="tech-tags">
+                    <span>C#</span><span>CAN Protocol</span><span>Peak Systems</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <span class="project-number">07</span>
+                <p class="company">APTIV</p>
+                <h3>Remote Automated Test Station</h3>
+                <p>Remote-controlled automated test station system using Raspberry Pi and Python scripts with configurable profiles. Created infrastructure for remote installation and hardware communication.</p>
+                <div class="tech-tags">
+                    <span>Python</span><span>Raspberry Pi</span><span>Linux</span>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <span class="project-number">08</span>
+                <p class="company">Honeywell</p>
+                <h3>Manufacturing Data Integration &amp; Dashboards</h3>
+                <p>Led data consolidation initiative aggregating data from fifty manufacturing stations. Implemented cloud automation with Power Automate and SharePoint, published real-time dashboards in Power BI.</p>
+                <div class="tech-tags">
+                    <span>Python</span><span>PowerShell</span><span>Power Automate</span><span>Power BI</span><span>MySQL</span><span>MongoDB</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="section-title">
+            <h2>Technical Skills</h2>
+            <div class="underline"></div>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-category fade-in">
+                <h3>Languages</h3>
+                <div class="skill-list">
+                    <span>C</span><span>C++</span><span>C#</span><span>Python</span><span>Java</span><span>LabVIEW</span><span>Visual Basic</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Backend &amp; APIs</h3>
+                <div class="skill-list">
+                    <span>.NET Core</span><span>WCF</span><span>REST</span><span>JSON</span><span>XML</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Databases</h3>
+                <div class="skill-list">
+                    <span>PostgreSQL</span><span>MySQL</span><span>SQL Server</span><span>MongoDB</span><span>MS Access</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Cloud &amp; Automation</h3>
+                <div class="skill-list">
+                    <span>Power Automate</span><span>SharePoint</span><span>PowerShell</span><span>Batch</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Data &amp; BI</h3>
+                <div class="skill-list">
+                    <span>Power BI</span><span>Pandas</span><span>NumPy</span><span>scikit-learn</span><span>Crystal Reports</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Protocols</h3>
+                <div class="skill-list">
+                    <span>CAN</span><span>LIN</span><span>TCP/IP</span><span>RS-232</span><span>RS-485</span><span>GPIB</span><span>I2C</span><span>SPI</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Hardware</h3>
+                <div class="skill-list">
+                    <span>NI DAQ Cards</span><span>PLC</span><span>Data Acquisition Systems</span><span>Multimeters</span><span>Oscilloscopes</span><span>Signal Processing Boards</span><span>Spectrum Analyzers</span><span>Raspberry Pi</span><span>GPIB Instruments</span>
+                </div>
+            </div>
+            <div class="skill-category fade-in">
+                <h3>Operating Systems</h3>
+                <div class="skill-list">
+                    <span>Windows</span><span>Linux</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EDUCATION & CERTS -->
+    <section id="education">
+        <div class="section-title">
+            <h2>Education &amp; Certifications</h2>
+            <div class="underline"></div>
+        </div>
+        <div class="edu-certs-grid">
+            <div class="edu-card fade-in">
+                <h3>Education</h3>
+                <div class="edu-item">
+                    <h4>B.S. Digital Systems and Communications Engineering</h4>
+                    <p class="school">Universidad Aut&oacute;noma de Ciudad Ju&aacute;rez (UACJ)</p>
+                    <p class="year">2009 &ndash; 2014</p>
+                </div>
+                <div class="edu-item">
+                    <h4>M.Sc. Computer Science (Incomplete)</h4>
+                    <p class="school">CICESE &ndash; Center for Scientific Research</p>
+                    <p class="year">2016</p>
+                </div>
+            </div>
+            <div class="cert-card fade-in">
+                <h3>Certifications</h3>
+                <ul class="cert-list">
+                    <li>
+                        <span>Data Science Foundations</span>
+                        <span class="provider">LinkedIn Learning</span>
+                    </li>
+                    <li>
+                        <span>Machine Learning with Python</span>
+                        <span class="provider">LinkedIn Learning</span>
+                    </li>
+                    <li>
+                        <span>Data Science with Python</span>
+                        <span class="provider">Coursera</span>
+                    </li>
+                    <li>
+                        <span>Deep Learning with TensorFlow</span>
+                        <span class="provider">Coursera</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="languages">
+            <div class="language-badge">
+                <span>Spanish</span>
+                <span class="level">Native</span>
+            </div>
+            <div class="language-badge">
+                <span>English</span>
+                <span class="level">Professional</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-links">
+            <a href="mailto:lucely.patricio_g@hotmail.com">Email</a>
+            <a href="tel:+526561222451">Phone</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+        </div>
+        <p>&copy; 2026 Mar&iacute;a Lucely Patricio Garc&iacute;a. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>

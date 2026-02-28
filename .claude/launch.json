@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "cmd.exe",
+      "runtimeArgs": ["/c", "powershell.exe -ExecutionPolicy Bypass -File C:\\Users\\PPC\\Downloads\\test\\server.ps1"],
+      "port": 8080,
+      "autoPort": true
+    }
+  ]
+}

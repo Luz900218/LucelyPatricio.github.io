@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(where python)",
+      "Bash(where py)",
+      "Bash(py --version)",
+      "Bash(where node)",
+      "Bash(node --version)",
+      "Bash(where npm)",
+      "Bash(where npx)",
+      "Bash(powershell.exe -Command \"Get-Command python,node,npm,npx -ErrorAction SilentlyContinue | Select-Object Name,Source\")",
+      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \"Write-Host ''hello''; exit 0\")",
+      "Bash(powershell.exe -Command \"Get-NetTCPConnection -LocalPort 8080 -ErrorAction SilentlyContinue | Select-Object OwningProcess | ForEach-Object { Stop-Process -Id $_OwningProcess -Force }\")",
+      "Bash(powershell.exe -Command \"Get-NetTCPConnection -LocalPort 8080 | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }\")"
+    ]
+  }
+}
