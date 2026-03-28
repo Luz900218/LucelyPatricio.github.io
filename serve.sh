@@ -1,2 +1,3 @@
 #!/bin/bash
-powershell.exe -ExecutionPolicy Bypass -File "C:\\Users\\PPC\\Downloads\\test\\server.ps1"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+powershell.exe -ExecutionPolicy Bypass -File "$SCRIPT_DIR/server.ps1"
