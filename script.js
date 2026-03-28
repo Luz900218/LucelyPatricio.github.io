@@ -22,6 +22,23 @@ function getImages(p) {
 
 var ROLES = {};
 
+// ─── Security: sanitize strings from JSON to prevent XSS ───
+function sanitize(str) {
+    if (typeof str !== 'string') return str;
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+}
+
+// Sanitize URL - only allow http, https and # links
+function sanitizeUrl(url) {
+    if (typeof url !== 'string') return '#';
+    url = url.trim();
+    if (url.charAt(0) === '#') return url;
+    if (url.indexOf('https://') === 0 || url.indexOf('http://') === 0) return url;
+    return '#';
+}
+
 fetch('config.json')
     .then(function(r) {
         if (!r.ok) throw new Error('Could not load config.json (HTTP ' + r.status + ')');
@@ -170,19 +187,19 @@ function styleActiveTabs(filter) {
 function renderHero(h, count) {
     document.getElementById('heroName').textContent = h.name;
     document.getElementById('heroSubtitle').textContent = h.subtitle;
-    document.getElementById('heroLinks').innerHTML = '<a href="' + h.linkedin + '" target="_blank">LinkedIn</a><a href="#projects">Projects</a>';
+    document.getElementById('heroLinks').innerHTML = '<a href="' + sanitizeUrl(h.linkedin) + '" target="_blank">LinkedIn</a><a href="#projects">Projects</a>';
     var statsHtml = '';
     for (var i = 0; i < h.stats.length; i++) {
-        var num = h.stats[i].number === 'auto' ? count + '+' : h.stats[i].number;
-        statsHtml += '<div class="stat"><span class="number">' + num + '</span><span class="label">' + h.stats[i].label + '</span></div>';
+        var num = h.stats[i].number === 'auto' ? count + '+' : sanitize(h.stats[i].number);
+        statsHtml += '<div class="stat"><span class="number">' + num + '</span><span class="label">' + sanitize(h.stats[i].label) + '</span></div>';
     }
     document.getElementById('heroStats').innerHTML = statsHtml;
     var initials = h.name.split(' ').map(function(w) { return w[0]; }).filter(function(c) { return c === c.toUpperCase(); });
     if (initials.length >= 4) {
-        document.getElementById('navLogo').innerHTML = initials.slice(0,2).join('') + '<span>' + initials.slice(2,4).join('') + '</span>';
+        document.getElementById('navLogo').innerHTML = sanitize(initials.slice(0,2).join('')) + '<span>' + sanitize(initials.slice(2,4).join('')) + '</span>';
     }
-    document.getElementById('footerLinks').innerHTML = '<a href="' + h.linkedin + '" target="_blank">LinkedIn</a><a href="#projects">Projects</a><a href="#skills">Skills</a>';
-    document.getElementById('footerCopy').innerHTML = '&copy; ' + new Date().getFullYear() + ' ' + h.name + '. All rights reserved.';
+    document.getElementById('footerLinks').innerHTML = '<a href="' + sanitizeUrl(h.linkedin) + '" target="_blank">LinkedIn</a><a href="#projects">Projects</a><a href="#skills">Skills</a>';
+    document.getElementById('footerCopy').innerHTML = '&copy; ' + new Date().getFullYear() + ' ' + sanitize(h.name) + '. All rights reserved.';
 }
 
 // ─── Project Tabs ───
@@ -197,7 +214,7 @@ function renderTabs(projects) {
     // Use ROLES order so tabs are consistent
     for (var k in ROLES) {
         if (roleCounts[k]) {
-            html += '<button class="tab-btn" data-filter="' + k + '">' + getRoleLabel(k) + ' <span class="tab-count">' + roleCounts[k] + '</span></button>';
+            html += '<button class="tab-btn" data-filter="' + k + '">' + sanitize(getRoleLabel(k)) + ' <span class="tab-count">' + roleCounts[k] + '</span></button>';
         }
     }
     el.innerHTML = html;
@@ -215,21 +232,21 @@ function renderCards(projects) {
         var images = getImages(p);
         var hasImg = images.length > 0;
         var imgCount = images.length;
-        var roleLabel = getRoleLabel(p.role);
+        var roleLabel = sanitize(getRoleLabel(p.role));
         var roleColor = getRoleColor(p.role);
 
-        html += '<div class="flip-container fade-in ' + (hasImg ? 'has-image' : '') + '" data-role="' + p.role + '">';
+        html += '<div class="flip-container fade-in ' + (hasImg ? 'has-image' : '') + '" data-role="' + sanitize(p.role) + '">';
         html += '<div class="flip-inner">';
         html += '<div class="flip-front"><div>';
-        html += '<span class="project-number">' + p.id + '</span>';
-        html += '<div class="card-top"><p class="company">' + p.company + '</p></div>';
-        html += '<h3>' + p.title + '</h3>';
-        html += '<p class="desc">' + p.description + '</p>';
+        html += '<span class="project-number">' + sanitize(p.id) + '</span>';
+        html += '<div class="card-top"><p class="company">' + sanitize(p.company) + '</p></div>';
+        html += '<h3>' + sanitize(p.title) + '</h3>';
+        html += '<p class="desc">' + sanitize(p.description) + '</p>';
         html += '<span class="desc-toggle">Read more</span>';
-        html += '<div class="impact">' + p.impact + '</div>';
+        html += '<div class="impact">' + sanitize(p.impact) + '</div>';
         html += '</div><div>';
         html += '<div class="tech-tags">';
-        for (var t = 0; t < p.tech.length; t++) html += '<span>' + p.tech[t] + '</span>';
+        for (var t = 0; t < p.tech.length; t++) html += '<span>' + sanitize(p.tech[t]) + '</span>';
         html += '</div>';
         html += '<div class="card-bottom">';
         html += '<span class="role-badge" style="background:' + hexToRgba(roleColor, 0.08) + ';color:' + roleColor + '">' + roleLabel + '</span>';
@@ -240,11 +257,11 @@ function renderCards(projects) {
         html += '</div></div></div>';
 
         if (hasImg) {
-            html += '<div class="flip-back" data-images=\'' + JSON.stringify(images) + '\' data-title="' + p.title + '" data-company="' + p.company + '">';
-            html += '<img class="back-image" src="' + images[0] + '" alt="' + p.title + '" loading="lazy">';
+            html += '<div class="flip-back" data-images=\'' + JSON.stringify(images) + '\' data-title="' + sanitize(p.title) + '" data-company="' + sanitize(p.company) + '">';
+            html += '<img class="back-image" src="' + sanitize(images[0]) + '" alt="' + sanitize(p.title) + '" loading="lazy">';
             html += '<div class="back-overlay"><div>';
-            html += '<div class="back-company">' + p.company + '</div>';
-            html += '<div class="back-title">' + p.title + '</div>';
+            html += '<div class="back-company">' + sanitize(p.company) + '</div>';
+            html += '<div class="back-title">' + sanitize(p.title) + '</div>';
             html += '</div><div class="back-hint">';
             html += imgCount > 1 ? 'Double-click to browse ' + imgCount + ' images' : 'Double-click to expand';
             html += '</div></div></div>';
@@ -361,7 +378,7 @@ function renderSkillTabs(skills) {
     // Use ROLES order so tabs match projects
     for (var k in ROLES) {
         if (roleCounts[k]) {
-            html += '<button class="tab-btn skill-tab" data-filter="' + k + '">' + getRoleLabel(k) + ' <span class="tab-count">' + roleCounts[k] + '</span></button>';
+            html += '<button class="tab-btn skill-tab" data-filter="' + k + '">' + sanitize(getRoleLabel(k)) + ' <span class="tab-count">' + roleCounts[k] + '</span></button>';
         }
     }
     el.innerHTML = html;
@@ -376,10 +393,10 @@ function renderSkills(skills) {
     var html = '';
     for (var i = 0; i < skills.length; i++) {
         var s = skills[i];
-        html += '<div class="skill-category fade-in" data-role="' + s.role + '">';
-        html += '<h3>' + s.category + '</h3>';
+        html += '<div class="skill-category fade-in" data-role="' + sanitize(s.role) + '">';
+        html += '<h3>' + sanitize(s.category) + '</h3>';
         html += '<div class="skill-list">';
-        for (var j = 0; j < s.items.length; j++) html += '<span>' + s.items[j] + '</span>';
+        for (var j = 0; j < s.items.length; j++) html += '<span>' + sanitize(s.items[j]) + '</span>';
         html += '</div></div>';
     }
     grid.innerHTML = html;
@@ -390,7 +407,7 @@ function renderEdu(items) {
     var el = document.getElementById('eduContainer');
     for (var i = 0; i < items.length; i++) {
         var d = document.createElement('div'); d.className = 'edu-item';
-        d.innerHTML = '<h4>' + items[i].degree + '</h4><p class="school">' + items[i].school + '</p><p class="year">' + items[i].year + '</p>';
+        d.innerHTML = '<h4>' + sanitize(items[i].degree) + '</h4><p class="school">' + sanitize(items[i].school) + '</p><p class="year">' + sanitize(items[i].year) + '</p>';
         el.appendChild(d);
     }
 }
@@ -401,7 +418,7 @@ function renderCerts(items) {
     var ul = document.createElement('ul'); ul.className = 'cert-list';
     for (var i = 0; i < items.length; i++) {
         var li = document.createElement('li');
-        li.innerHTML = '<span>' + items[i].name + '</span><span class="provider">' + items[i].provider + '</span>';
+        li.innerHTML = '<span>' + sanitize(items[i].name) + '</span><span class="provider">' + sanitize(items[i].provider) + '</span>';
         ul.appendChild(li);
     }
     el.appendChild(ul);
@@ -411,6 +428,6 @@ function renderCerts(items) {
 function renderLangs(items) {
     var html = '';
     for (var i = 0; i < items.length; i++)
-        html += '<div class="language-badge"><span>' + items[i].name + '</span><span class="level">' + items[i].level + '</span></div>';
+        html += '<div class="language-badge"><span>' + sanitize(items[i].name) + '</span><span class="level">' + sanitize(items[i].level) + '</span></div>';
     document.getElementById('langContainer').innerHTML = html;
 }
