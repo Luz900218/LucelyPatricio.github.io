@@ -23,21 +23,46 @@ function getImages(p) {
 var ROLES = {};
 
 fetch('config.json')
-    .then(function(r) { return r.json(); })
+    .then(function(r) {
+        if (!r.ok) throw new Error('Could not load config.json (HTTP ' + r.status + ')');
+        return r.json();
+    })
     .then(function(cfg) {
+        // Validate minimum required sections
+        var missing = [];
+        if (!cfg.roles) missing.push('roles');
+        if (!cfg.hero) missing.push('hero');
+        if (!cfg.projects) missing.push('projects');
+        if (!cfg.skills) missing.push('skills');
+
+        if (missing.length > 0) {
+            showError('config.json is missing required sections: ' + missing.join(', '));
+            return;
+        }
+
         ROLES = cfg.roles || {};
         renderHero(cfg.hero, cfg.projects.length);
-        document.getElementById('aboutText').textContent = cfg.about;
+        document.getElementById('aboutText').textContent = cfg.about || '';
         renderTabs(cfg.projects);
         renderCards(cfg.projects);
         renderSkillTabs(cfg.skills);
         renderSkills(cfg.skills);
-        renderEdu(cfg.education);
-        renderCerts(cfg.certifications);
-        renderLangs(cfg.languages);
+        if (cfg.education) renderEdu(cfg.education);
+        if (cfg.certifications) renderCerts(cfg.certifications);
+        if (cfg.languages) renderLangs(cfg.languages);
         observeAll();
     })
-    .catch(function(err) { console.error('Error:', err); });
+    .catch(function(err) {
+        console.error('Error:', err);
+        showError(err.message);
+    });
+
+function showError(message) {
+    var banner = document.createElement('div');
+    banner.style.cssText = 'position:fixed;top:60px;left:0;right:0;z-index:99;background:#dc2626;color:#fff;padding:1rem 2rem;text-align:center;font-size:0.9rem;font-family:monospace;';
+    banner.innerHTML = '<strong>Error loading portfolio:</strong> ' + message + '<br><small>Check that config.json exists and is valid JSON. Open browser console (F12) for details.</small>';
+    document.body.appendChild(banner);
+}
 
 function getRoleLabel(key) {
     return ROLES[key] ? ROLES[key].label : key;
@@ -239,6 +264,11 @@ function renderCards(projects) {
                     openLightbox(JSON.parse(back.getAttribute('data-images')), back.getAttribute('data-title'), back.getAttribute('data-company'));
                 }
             };
+            card.addEventListener('mouseleave', function() {
+                if (card.classList.contains('flipped')) {
+                    card.classList.remove('flipped');
+                }
+            });
         })(cards[c]);
     }
 
@@ -263,13 +293,13 @@ function renderCards(projects) {
                         toggle.textContent = 'Read less';
                     }
                 };
-                card.onmouseleave = function() {
+                card.addEventListener('mouseleave', function() {
                     if (desc.classList.contains('expanded')) {
                         desc.classList.remove('expanded');
                         card.classList.remove('desc-open');
                         toggle.textContent = 'Read more';
                     }
-                };
+                });
             })(toggles[d]);
         }
     });

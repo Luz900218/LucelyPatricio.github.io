@@ -40,44 +40,52 @@
     "projects": [
         {
             "id": "01",
-            "title": "Manufacturing Traceability System",
-            "company": "Audisel Inc",
-            "role": "dev",
-            "description": "Designed and built a real-time traceability system in C# using Windows Communication Foundation and MySQL database. Implemented XML-based messaging to synchronize data across ten manufacturing stations.",
-            "impact": "10 stations synchronized in real-time",
+            "title": "Equipment Performance Dashboard",
+            "company": "Personal Project",
+            "role": "data",
+            "description": "Interactive React dashboard for real-time DUT calibration performance analytics. CSV-driven data with filterable views by date, product, and Equipment with historical trend analysis.",
+            "impact": "Real-time yield monitoring across 16 Equipment",
             "tech": [
-                "C#",
-                "Windows Forms",
-                "MySQL",
-                "XML"
+                "React",
+                "Recharts",
+                "JavaScript",
+                "CSV/ETL"
             ],
-            "image": ""
+            "image": "images/project-01a.png"
         },
         {
             "id": "02",
-            "title": "Automated Test Power Supply System",
-            "company": "VISHAY",
-            "role": "auto",
-            "description": "Designed automated test orchestration and data profiling system in C# using Windows Forms and SQL Server. Managed load balancing across twenty-four power supplies with real-time condition monitoring.",
-            "impact": "24 power supplies managed concurrently",
+            "title": "Manufacturing Data Integration & Dashboards",
+            "company": "Honeywell",
+            "role": "data",
+            "description": "Led data consolidation initiative aggregating data from fifty manufacturing stations. Implemented cloud automation with Power Automate and SharePoint, published real-time dashboards in Power BI.",
+            "impact": "50+ stations consolidated into real-time BI",
             "tech": [
-                "C#",
-                "Windows Forms",
-                "SQL Server"
+                "Python",
+                "PowerShell",
+                "Power Automate",
+                "Power BI",
+                "MySQL",
+                "MongoDB"
             ],
-            "image": ""
+            "image": [
+                "images/project-02a.png",
+                "images/project-02b.png",
+				"images/project-02c.png"
+            ]
         },
         {
             "id": "03",
-            "title": "PCB Resistance Measurement System",
-            "company": "VISHAY",
+            "title": "IoT Sensor Integration Pipeline",
+            "company": "Honeywell",
             "role": "auto",
-            "description": "Automated PCB test station software in C# with WPF interface to acquire measurements from precision instrumentation and apply calibration formulas for accurate low-resistance measurements.",
-            "impact": "Sub-milliohm measurement accuracy",
+            "description": "ETL pipeline for IoT sensor data ingestion from manufacturing floor equipment. Automated data collection, transformation, and storage using Python and PowerShell scheduling.",
+            "impact": "Automated data collection from IoT endpoints",
             "tech": [
-                "C#",
-                "WPF",
-                "Microsoft Access"
+                "Python",
+                "PowerShell",
+                "MongoDB",
+                "IoT"
             ],
             "image": ""
         },
@@ -99,34 +107,6 @@
         },
         {
             "id": "05",
-            "title": "Thermal Imaging Stress Test System",
-            "company": "VISHAY",
-            "role": "auto",
-            "description": "High-current stress test system in C# with custom thermal image processing to detect hot zones and failure patterns in real-time using Optris infrared camera integration.",
-            "impact": "Real-time failure detection via thermal analysis",
-            "tech": [
-                "C#",
-                "Optris API",
-                "Imaging Libraries"
-            ],
-            "image": ""
-        },
-        {
-            "id": "06",
-            "title": "CAN Communication Library",
-            "company": "APTIV",
-            "role": "dev",
-            "description": "Reusable C# CAN communication library using Peak Systems hardware to simplify ECU integration with message encapsulation and automotive protocol alignment.",
-            "impact": "Reusable across multiple APTIV projects",
-            "tech": [
-                "C#",
-                "CAN Protocol",
-                "Peak Systems"
-            ],
-            "image": ""
-        },
-        {
-            "id": "07",
             "title": "Remote Automated Test Station",
             "company": "APTIV",
             "role": "dev",
@@ -140,108 +120,78 @@
             "image": ""
         },
         {
-            "id": "08",
-            "title": "Manufacturing Data Integration & Dashboards",
-            "company": "Honeywell",
-            "role": "data",
-            "description": "Led data consolidation initiative aggregating data from fifty manufacturing stations. Implemented cloud automation with Power Automate and SharePoint, published real-time dashboards in Power BI.",
-            "impact": "50+ stations consolidated into real-time BI",
+            "id": "06",
+            "title": "Automated Test Power Supply System",
+            "company": "VISHAY",
+            "role": "auto",
+            "description": "Designed automated test orchestration and data profiling system in C# using Windows Forms and SQL Server. Managed load balancing across twenty-four power supplies with real-time condition monitoring.",
+            "impact": "24 power supplies managed concurrently",
             "tech": [
-                "Python",
-                "PowerShell",
-                "Power Automate",
-                "Power BI",
-                "MySQL",
-                "MongoDB"
+                "C#",
+                "Windows Forms",
+                "SQL Server"
             ],
-            "image": [
-                "images/project-08a.png",
-                "images/project-08b.png",
-				"images/project-08c.png"
-            ]
+            "image": ""
+        },
+        {
+            "id": "07",
+            "title": "Thermal Imaging Stress Test System",
+            "company": "VISHAY",
+            "role": "auto",
+            "description": "High-current stress test system in C# with custom thermal image processing to detect hot zones and failure patterns in real-time using Optris infrared camera integration.",
+            "impact": "Real-time failure detection via thermal analysis",
+            "tech": [
+                "C#",
+                "Optris API",
+                "Imaging Libraries"
+            ],
+            "image": ""
+        },
+        {
+            "id": "08",
+            "title": "CAN Communication Library",
+            "company": "APTIV",
+            "role": "dev",
+            "description": "Reusable C# CAN communication library using Peak Systems hardware to simplify ECU integration with message encapsulation and automotive protocol alignment.",
+            "impact": "Reusable across multiple APTIV projects",
+            "tech": [
+                "C#",
+                "CAN Protocol",
+                "Peak Systems"
+            ],
+            "image": ""
         },
         {
             "id": "09",
-            "title": "IoT Sensor Integration Pipeline",
-            "company": "Honeywell",
+            "title": "PCB Resistance Measurement System",
+            "company": "VISHAY",
             "role": "auto",
-            "description": "ETL pipeline for IoT sensor data ingestion from manufacturing floor equipment. Automated data collection, transformation, and storage using Python and PowerShell scheduling.",
-            "impact": "Automated data collection from IoT endpoints",
+            "description": "Automated PCB test station software in C# with WPF interface to acquire measurements from precision instrumentation and apply calibration formulas for accurate low-resistance measurements.",
+            "impact": "Sub-milliohm measurement accuracy",
             "tech": [
-                "Python",
-                "PowerShell",
-                "MongoDB",
-                "IoT"
+                "C#",
+                "WPF",
+                "Microsoft Access"
             ],
             "image": ""
         },
         {
             "id": "10",
-            "title": "Equipment Performance Dashboard",
-            "company": "Personal Project",
-            "role": "data",
-            "description": "Interactive React dashboard for real-time DUT calibration performance analytics. CSV-driven data with filterable views by date, product, and equipment with historical trend analysis.",
-            "impact": "Real-time yield monitoring across 16 equipments",
+            "title": "Manufacturing Traceability System",
+            "company": "Audisel Inc",
+            "role": "dev",
+            "description": "Designed and built a real-time traceability system in C# using Windows Communication Foundation and MySQL database. Implemented XML-based messaging to synchronize data across ten manufacturing stations.",
+            "impact": "10 stations synchronized in real-time",
             "tech": [
-                "React",
-                "Recharts",
-                "JavaScript",
-                "CSV/ETL"
+                "C#",
+                "Windows Forms",
+                "MySQL",
+                "XML"
             ],
-            "image": "images/project-10a.png"
+            "image": ""
         }
     ],
     "skills": [
-        {
-            "category": "Languages",
-            "role": "dev",
-            "items": [
-                "C#",
-                "Python",
-                "C++",
-                "C",
-                "Java",
-                "JavaScript",
-                "HTML",
-                "CSS",
-                "SQL",
-                "Visual Basic"
-            ]
-        },
-        {
-            "category": "Backend & APIs",
-            "role": "dev",
-            "items": [
-                ".NET Core",
-                "REST API Development (C#, Python)",
-                "Client-Server Architecture",
-                "System Integration",
-                "JSON",
-                "XML"
-            ]
-        },
-        {
-            "category": "Databases",
-            "role": "dev",
-            "items": [
-                "SQL Server, MySQL, PostgreSQL, MongoDB, MS Access",
-                "Database Design & Administration",
-                "Query Optimization & Performance Tuning",
-                "Stored Procedures, Views & Triggers",
-                "Data Modeling & Schema Design",
-                "User Roles & Access Control"
-            ]
-        },
-        {
-            "category": "Cloud & Automation",
-            "role": "data",
-            "items": [
-                "Power Automate",
-                "SharePoint",
-                "PowerShell",
-                "Automation Scripting (PowerShell, Batch, Task Scheduling)"
-            ]
-        },
         {
             "category": "Data & BI",
             "role": "data",
@@ -268,6 +218,69 @@
                 "Design of Experiments (DOE)",
                 "Statistical Data Interpretation",
                 "Data Analysis with Jupyter Notebook"
+            ]
+        },
+        {
+            "category": "Cloud & Automation",
+            "role": "data",
+            "items": [
+                "Power Automate",
+                "SharePoint",
+                "PowerShell",
+                "Automation Scripting (PowerShell, Batch, Task Scheduling)"
+            ]
+        },
+        {
+            "category": "Testing & DevOps",
+            "role": "dev",
+            "items": [
+                "Jest",
+                "Cypress",
+                "JSON Schema Validation (Ajv)",
+                "CI/CD (GitHub Actions)",
+                "Git & GitHub",
+                "Test Automation (Unit, E2E)",
+                "npm & Node.js Tooling"
+            ]
+        },
+        {
+            "category": "Languages",
+            "role": "dev",
+            "items": [
+                "C#",
+                "Python",
+                "C++",
+                "C",
+                "Java",
+                "JavaScript",
+                "HTML",
+                "CSS",
+                "SQL",
+                "Visual Basic"
+            ]
+        },
+        {
+            "category": "Databases",
+            "role": "dev",
+            "items": [
+                "SQL Server, MySQL, PostgreSQL, MongoDB, MS Access",
+                "Database Design & Administration",
+                "Query Optimization & Performance Tuning",
+                "Stored Procedures, Views & Triggers",
+                "Data Modeling & Schema Design",
+                "User Roles & Access Control"
+            ]
+        },
+        {
+            "category": "Backend & APIs",
+            "role": "dev",
+            "items": [
+                ".NET Core",
+                "REST API Development (C#, Python)",
+                "Client-Server Architecture",
+                "System Integration",
+                "JSON",
+                "XML"
             ]
         },
         {
